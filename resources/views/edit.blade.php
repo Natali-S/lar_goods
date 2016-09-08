@@ -9,7 +9,7 @@
     @include('common.errors')
 
     <!-- Форма новой задачи -->
-    <form action="/edit" method="POST" class="form-horizontal">
+    <form action="/edit/{{ $task->id }}" method="POST" class="form-horizontal">
       {{ csrf_field() }}
 
         <div class="form-group">
