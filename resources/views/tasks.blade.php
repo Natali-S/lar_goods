@@ -31,7 +31,7 @@
         <label for="task" class="col-sm-3 control-label">Введите описание товара</label>
 
         <div class="col-sm-6">
-            <textarea name="description" id="task-description" cols="40" rows="6" class="form-control"></textarea>
+            <textarea name="description" id="task-description" cols="30" rows="6" class="form-control"></textarea>
          
         </div>
       </div>
@@ -39,9 +39,12 @@
         <label for="task" class="col-sm-3 control-label">Выберите категорию товара</label>
 
         <div class="col-sm-3">
-            <input type="radio" name="categories" value="high"> High<Br>
-            <input type="radio" name="categories" value="middle"> Middle<Br>
-            <input type="radio" name="categories" value="low"> Low<Br>
+             <p><select size="1" name="categ">
+                    <option disabled selected>Выберите категорию</option>
+                    <option value="High">High</option>
+                    <option value="Middle">Middle</option>
+                    <option value="Low">Low</option>
+                </select></p>
           
         </div>
       </div>
@@ -49,7 +52,7 @@
       <!-- Кнопка добавления задачи -->
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
-          <button type="submit" class="btn btn-default">
+          <button type="submit" class="btn btn-info">
             <i class="fa fa-plus"></i> Добавить товар
           </button>
         </div>
@@ -93,14 +96,22 @@
   <td class="table-text">
     <div>{{ $task->categories }}</div>
   </td>
-
+    <!-- Кнопка Изменить -->
+<td>
+    <form action="/edit/{{ $task->id }}" method="POST">
+        {{ csrf_field() }}
+        <!--{{ method_field('EDIT') }}-->
+        <button class="btn btn-warning">Изменить</button>
+    </form>
+  </td>
+</tr>
   <!-- Кнопка Удалить -->
   <td>
     <form action="/task/{{ $task->id }}" method="POST">
       {{ csrf_field() }}
       {{ method_field('DELETE') }}
 
-      <button>Удалить задачу</button>
+      <button class="btn btn-danger">Удалить</button>
     </form>
   </td>
 </tr>

@@ -38,7 +38,15 @@ Route::post('/task', function (Request $request) {
 
   return redirect('/');
 });
-
+ /**
+   * Изменить существующую задачу
+   */
+ Route::post('/edit/{id}', function ($id) {
+  $task=Task::find($id);
+return view('edit', [
+    'task' => $task
+  ]);
+ });
   /**
    * Удалить существующую задачу
    */
