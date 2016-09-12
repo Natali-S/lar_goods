@@ -1,4 +1,4 @@
-<?php
+<<?php
 
   use App\Task;
   use Illuminate\Http\Request;
@@ -20,20 +20,20 @@ Route::get('/', function () {
 Route::post('/task', function (Request $request) {
   $validator = Validator::make($request->all(), [
     'name' => 'required|max:255',
+   'price' => 'required|integer',
+    'description' => 'required',
+    'categories' => 'required',
   ]);
-
   if ($validator->fails()) {
     return redirect('/')
       ->withInput()
       ->withErrors($validator);
   }
-
   $task = new Task;
   $task->name = $request->name;
   $task->description = $request->description;
   $task->price = $request->price;
   $task->categories = $request->categories;
-  
   $task->save();
 
   return redirect('/');
@@ -41,26 +41,37 @@ Route::post('/task', function (Request $request) {
  /**
    * Изменить существующую задачу
    */
- Route::post('/edit/{id}', function ($id, Request $request) {
+ Route::post('/edit/{id}', function ($id) {
   $task=Task::find($id);
 return view('edit', [
     'task' => $task
   ]);
- 
-  $task->name = $request->name;
-  $task->description = $request->description;
-  $task->price = $request->price;
-  $task->categories = $request->categories;
-  
-  $task->save();
-
-  return redirect('/');
  });
+  /**
+   * Сохранить существующую задачу
+   */
+ Route::post('/save/{id}', function ($id, Request $request) {
+    $validator = Validator::make($request->all(), [
+		'name' => 'required|max:255',
+    ]);
+    if ($validator->fails()) {
+	return redirect("/")
+			->withInput()
+			->withErrors($validator);
+    }
+    $res = Task::find($id);
+    $res->name = $request->name;
+    $res->price = $request->price;
+    $res->description = $request->description;
+    $res->categories = $request->categories;
+    $res->save();
+    return redirect('/');
+});
+
   /**
    * Удалить существующую задачу
    */
  Route::delete('/task/{id}', function ($id) {
   Task::findOrFail($id)->delete();
-
   return redirect('/');
 });
