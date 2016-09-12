@@ -9,7 +9,7 @@
     @include('common.errors')
 
     <!-- Форма новой задачи -->
-    <form action="/edit/{{ $task->id }}" method="POST" class="form-horizontal">
+    <form action="/save/{{ $task->id }}" method="POST" class="form-horizontal">
       {{ csrf_field() }}
 
         <div class="form-group">
@@ -41,18 +41,21 @@
         <label for="task" class="col-sm-3 control-label">Категория товара</label>
 
         <div class="col-sm-3">
-            <p><select size="1" name="categ">
+             <input type="radio" name="categories" value="high"> High<Br>
+             <input type="radio" name="categories" value="middle"> Middle<Br>
+             <input type="radio" name="categories" value="low"> Low<Br>
+<!--            <p><select size="1" name="categ">
                     <option disabled >Выберите категорию</option>
                     <option >{{ $task->categories }}</option>
                     <option value="High">High</option>
                     <option value="Middle">Middle</option>
                     <option value="Low">Low</option>
-                </select></p>
+                </select></p>-->
         </div>
       </div>     
       <div class="form-group">
         <div class="col-sm-offset-3 col-sm-6">
-          <button type="submit" class="btn btn-info" name="save">
+         <button type="submit" class="btn btn-info" name="save">
             Сохранить 
           </button>
         </div>
