@@ -39,12 +39,15 @@
         <label for="task" class="col-sm-3 control-label">Выберите категорию товара</label>
 
         <div class="col-sm-3">
-             <p><select size="1" name="categ">
-                    <option disabled selected>Выберите категорию</option>
+            <input type="radio" name="categories" value="high"> High<Br>
+             <input type="radio" name="categories" value="middle"> Middle<Br>
+             <input type="radio" name="categories" value="low"> Low<Br>
+<!--             <p><select size="3" name="categ">
+                    <option disabled >Выберите категорию</option>
                     <option value="High">High</option>
                     <option value="Middle">Middle</option>
                     <option value="Low">Low</option>
-                </select></p>
+                </select></p>-->
           
         </div>
       </div>
@@ -100,7 +103,6 @@
 <td>
     <form action="/edit/{{ $task->id }}" method="POST">
         {{ csrf_field() }}
-        <!--{{ method_field('EDIT') }}-->
         <button class="btn btn-warning">Изменить</button>
     </form>
   </td>
